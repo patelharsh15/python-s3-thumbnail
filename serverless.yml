@@ -35,7 +35,7 @@ provider:
   
 custom:
   dynamotable: image-url-tables
-  bucket: paulo-gen-thumbnails
+  bucket: comtech-coop-data
   pythonRequirements:
    # pythonBin: /opt/python3.8/bin/python
     dockerizePip: true
