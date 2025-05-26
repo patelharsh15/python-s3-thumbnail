@@ -40,7 +40,8 @@ custom:
   bucket: ${self:provider.deploymentBucket.name}
   pythonRequirements:
    # pythonBin: /opt/python3.8/bin/python
-    dockerizePip: true
+    # dockerizePip: true
+    zip: true
 
 
 functions:
@@ -117,6 +118,6 @@ resources:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 
-#MUST first run: serverless plugin install -n serverless-python-requirements
-plugins:
-  - serverless-python-requirements
+# #MUST first run: serverless plugin install -n serverless-python-requirements
+# plugins:
+#   - serverless-python-requirements
