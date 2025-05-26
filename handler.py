@@ -7,8 +7,6 @@ import os
 import uuid
 import json
 
-
-
 s3 = boto3.client('s3')
 # dynamodb = boto3.client('dynamodb')
 dynamodb = boto3.resource(

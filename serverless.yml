@@ -4,12 +4,14 @@ frameworkVersion: '>=4'
 
 provider:
   name: aws
-  runtime: python3.8
+  runtime: python3.10
   region: us-east-1
   profile: default
   stage: "dev"
   timeout: 10
   memorySize: 128
+  deploymentBucket:
+    name: comtech-coop-data
   environment:
     THUMBNAIL_SIZE: "128"
     DYNAMODB_TABLE: ${self:custom.dynamotable}
@@ -35,7 +37,7 @@ provider:
   
 custom:
   dynamotable: image-url-tables
-  bucket: comtech-coop-data
+  bucket: ${self:provider.deploymentBucket.name}
   pythonRequirements:
    # pythonBin: /opt/python3.8/bin/python
     dockerizePip: true
@@ -48,6 +50,7 @@ functions:
       - s3:
           bucket: ${self:custom.bucket}
           event: s3:ObjectCreated:*
+          existing: true
           rules:
             - suffix: .png
 
@@ -96,9 +99,9 @@ functions:
 # you can add CloudFormation resource templates here
 resources:
  Resources:
-   ImagesDynamoDbTable:
-     Type: AWS::DynamoDB::Table
-     Properties:
+    ImagesDynamoDbTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
